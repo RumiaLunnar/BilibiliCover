@@ -1,0 +1,27 @@
+#!/usr/bin/python3
+import os
+import tkinter
+import re
+from pyvirtualdisplay import Display
+from selenium import webdriver
+from urllib.request import urlretrieve,URLError
+
+display=Display(visible=0,size=(800,600))
+display.start()
+avcode=input("Enter the av number: ")
+driver=webdriver.Firefox()
+try:
+    driver.get('https://search.bilibili.com/all?keyword='+avcode)
+    data=driver.page_source
+    url_list=re.findall('src=\"(.*?).jpg\"',data,re.S)
+
+    for url in url_list:
+        if '.jpg@' in url:
+            url=url[2:]
+            break
+    urlretrieve('http://'+url,"cover.jpg")
+    driver.close()
+    display.stop()
+    os.system('eog cover.jpg')
+except URLError:
+        print("Please check your avcode")

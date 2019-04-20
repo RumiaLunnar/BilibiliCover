@@ -4,8 +4,8 @@
 ### 使用方法
 
 ```
-chmod a+x Cover.jpg
+$ chmod a+x Cover.jpg
 ```
 ```
-./Cover.jpg
+$ ./Cover.jpg
 ```

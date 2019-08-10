@@ -1,40 +1,61 @@
+<!DOCTYPE html>
 <html>
+    <head>
+            <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
+            <title>BiliBili Tools</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    </head>
+    <body>
+            <nav class="navbar navbar-expand-sm bg-light">
 
-<head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
-        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm.min.css">
-    <script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
-    <script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm.min.js' charset='utf-8'></script>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-    <link rel="shortcut icon" href="/favicon.ico">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-</head>
+                    <!-- Links -->
+                    <ul class="navbar-nav">
+                      <li class="nav-item">
+                        <a class="navbar-brand" href="#">BiliBili Tools</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">封面获取</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                      </li>
+                    </ul>
 
-<body class="content-padded">
-    <div class="container">
-        <header class="bar bar-nav">
-            <h1 class="title">BiliBiliCover</h1>
-        </header>
-        <div class="card demo-card-header-pic">
-            <div valign="bottom" class="card-header color-white no-border no-padding">
-                <img class='card-cover'                    alt="">
+                  </nav>
+        <div class="container">
+            <div>
+                <img id ='cover'src="" class="img-rounded">
             </div>
-            <div class="card-content">
-                <div class="card-content-inner">
-                    <p class="color-gray">发表于 2015/01/15</p>
-                    <p>此处是内容...</p>
+            <div class="container">
+                <input type="text" class="form-control" id="aid" placeholder="请输入av号 例如999">
+                <br>
+                <div style="text-align: center">
+                     <button class="btn" onclick="get_cover()">确定</button>
                 </div>
-            </div>
-            <div class="card-footer">
-                <a href="#" class="link">赞</a>
-                <a href="#" class="link">更多</a>
+
             </div>
         </div>
-    </div>
+    </body>
 
-</body>
-
+    <script>
+        function get_cover(){
+            var aid = $('#aid').val()
+            console.log(aid)
+            $.ajax({
+                type:"POST",
+                url:'/get_cover',
+                data:{'aid':aid},
+                success:function(result){
+                    console.log(result)
+                    document.getElementById('cover').src=result
+                    //直接请求会有referre问题
+                },
+                error:function(e){
+                    console.log(e.status)
+                    console.log(e.responseText)
+                }
+            })
+        }
+    </script>
 </html>

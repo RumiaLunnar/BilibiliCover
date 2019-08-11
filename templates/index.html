@@ -47,9 +47,10 @@
                 url:'/get_cover',
                 data:{'aid':aid},
                 success:function(result){
+                    var version = Math.random();
                     console.log(result)
-                    document.getElementById('cover').src=result
-                    //直接请求会有referre问题
+                    document.getElementById('cover').src='/static/cover?'+version //加入随机数避免服务端刷新而前端不刷新的问题
+                    //直接请求会有referer问题
                 },
                 error:function(e){
                     console.log(e.status)

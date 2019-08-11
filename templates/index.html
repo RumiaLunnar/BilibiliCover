@@ -23,10 +23,12 @@
                     </ul>
 
                   </nav>
+                  <br>
         <div class="container">
-            <div>
-                <img id ='cover'src="" class="img-rounded">
+            <div class="container row justify-content-center">
+                <span style="text-align:center"><img id ='cover'src="" class="img-rounded" height="300" width="400"/></span>
             </div>
+            <br>
             <div class="container">
                 <input type="text" class="form-control" id="aid" placeholder="请输入av号 例如999">
                 <br>
@@ -47,10 +49,14 @@
                 url:'/get_cover',
                 data:{'aid':aid},
                 success:function(result){
+                    document.getElementById('cover').src=""
                     var version = Math.random();
-                    console.log(result)
-                    document.getElementById('cover').src='/static/cover?'+version //加入随机数避免服务端刷新而前端不刷新的问题
-                    //直接请求会有referer问题
+                    if(result==0){
+                        document.getElementById('cover').src='/static/cover?'+version //加入随机数避免服务端刷新而前端不刷新的问题
+                    }
+                    else{
+                        alert(result)
+                    }
                 },
                 error:function(e){
                     console.log(e.status)

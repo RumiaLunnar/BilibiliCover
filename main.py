@@ -32,9 +32,7 @@ def get_cover():
             data = response['data']
             pic_url = data['pic']
             cover = urlretrieve(pic_url,'./static/cover')
-            return 'ok'
-        else:
-            return ('error message:',response['message'])
+        return (response['message'])
 
 
 if __name__ == '__main__':

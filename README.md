@@ -7,6 +7,8 @@
 $ python main.py
 ```
 ---
+新接口：
+https://api.bilibili.com/x/web-interface/view?bvid=BVNUMBER
 
 - 得到了一个接口，不再需要selenium了。
 - 顺手写了一个后端的flask，前端简单的用了一下bootstrap4
